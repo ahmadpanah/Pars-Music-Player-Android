@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                     mMediaPlayer.start();
                     play.setImageResource(R.drawable.ic_pause_24);
                 }
+                SongNames();
             }
         });
 
@@ -73,8 +74,39 @@ public class MainActivity extends AppCompatActivity {
                 }
                 mMediaPlayer = MediaPlayer.create(getApplicationContext(),songs.get(currentIndex));
                 mMediaPlayer.start();
+                SongNames();
             }
 
         });
+        prev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mMediaPlayer != null){
+                    play.setImageResource(R.drawable.ic_pause_24);
+                }
+                if (currentIndex > 0){
+                    currentIndex--;
+                } else {
+                    currentIndex = songs.size() -1;
+                }
+                if (mMediaPlayer.isPlaying()){
+                    mMediaPlayer.stop();
+                }
+
+                mMediaPlayer = MediaPlayer.create(getApplicationContext(),songs.get(currentIndex));
+                mMediaPlayer.start();
+                SongNames();
+            }
+        });
         };
+
+    private void SongNames(){
+        if (currentIndex == 0){
+            songTitle.setText("Aroome Joon - Evan Band");
+            coverArt.setImageResource(R.drawable.evan);
+        } else if (currentIndex == 1){
+            songTitle.setText("Ashoob - Ali Sedighi");
+            coverArt.setImageResource(R.drawable.ashoob);
+        }
+    }
     }
